@@ -1,17 +1,24 @@
-from rest_framework import generics, authentication, permissions, status, viewsets, response
+from rest_framework import generics, authentication, permissions, status, viewsets, response, pagination
 
 from form_builder_backend.typeforms.api.serializers import FormSerializer, FormWithFieldsSerializer, FieldSerializer, \
     OptionSerializer
 from form_builder_backend.typeforms.models import Form, Field
+from form_builder_backend.typeforms.api.mixins import GetSerializerClassMixin
 
 
-class FormViewSet(viewsets.ModelViewSet):
+class FormViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows typeforms to be viewed or edited.
     """
 
-    serializer_class = FormSerializer
+    serializer_class = FormWithFieldsSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    serializer_action_classes = {
+        'list': FormSerializer,
+        'create': FormSerializer,
+        'retrieve': FormWithFieldsSerializer,
+        'update': FormSerializer,
+    }
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -24,21 +31,6 @@ class FormViewSet(viewsets.ModelViewSet):
         instance.deleted = True
         instance.save()
         return response.Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class FormWithFieldsViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    API endpoint that allows typeforms with fields to be viewed only.
-    """
-
-    serializer_class = FormWithFieldsSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-    def get_queryset(self):
-        return Form.objects.filter(user=self.request.user, deleted=False)
 
 
 class FieldViewSet(viewsets.ModelViewSet):
