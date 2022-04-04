@@ -42,10 +42,10 @@ class FieldViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user, form=self.kwargs['form_pk'])
+        serializer.save(user=self.request.user, form_id=self.kwargs['form_pk'])
 
     def get_queryset(self):
-        return Field.objects.filter(user=self.request.user, form=self.kwargs['form_pk'], deleted=False)
+        return Field.objects.filter(user=self.request.user, form_id=self.kwargs['form_pk'], deleted=False)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -63,10 +63,10 @@ class OptionViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user, field=self.kwargs['field_pk'])
+        serializer.save(user=self.request.user, field_id=self.kwargs['field_pk'])
 
     def get_queryset(self):
-        return Field.objects.filter(user=self.request.user, field=self.kwargs['field_pk'], deleted=False)
+        return Field.objects.filter(user=self.request.user, field_id=self.kwargs['field_pk'], deleted=False)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
