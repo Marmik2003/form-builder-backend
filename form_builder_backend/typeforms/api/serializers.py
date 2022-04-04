@@ -9,7 +9,7 @@ class OptionSerializer(serializers.ModelSerializer):
 
 
 class FieldSerializer(serializers.ModelSerializer):
-    options = OptionSerializer(many=True)
+    options = OptionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Field
