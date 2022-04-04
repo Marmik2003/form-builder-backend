@@ -38,7 +38,7 @@ class Field(models.Model):
         ('checkbox', 'Checkbox'),
     )
     form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name='fields')
-    name = models.CharField(max_length=100)
+    label = models.CharField(max_length=100)
     type = models.CharField(max_length=100, choices=FORM_TYPE)
     kind = models.CharField(max_length=100, choices=FORM_KIND)
     order = models.IntegerField(default=0, blank=True)
@@ -49,7 +49,7 @@ class Field(models.Model):
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.label
 
     class Meta:
         ordering = ('order', '-created_at',)
