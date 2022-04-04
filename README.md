@@ -1,4 +1,4 @@
-# form-builder-backend
+# Typeform Builder
 
 Form Builder Backend (Clone of TypeForm) - Made for GDC WD301 Course
 

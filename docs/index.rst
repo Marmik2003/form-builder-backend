@@ -1,9 +1,9 @@
-.. form-builder-backend documentation master file, created by
+.. Typeform Builder documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to form-builder-backend's documentation!
+Welcome to Typeform Builder's documentation!
 ======================================================================
 
 .. toctree::

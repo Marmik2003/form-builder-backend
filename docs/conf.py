@@ -26,7 +26,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "form-builder-backend"
+project = "Typeform Builder"
 copyright = """2022, Marmik Patel"""
 author = "Marmik Patel"
 

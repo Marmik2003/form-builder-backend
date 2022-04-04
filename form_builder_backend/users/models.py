@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     """
-    Default custom user model for form-builder-backend.
+    Default custom user model for Typeform Builder.
     If adding fields that need to be filled at user signup,
     check typeforms.SignupForm and typeforms.SocialSignupForms accordingly.
     """
