@@ -94,7 +94,7 @@ class FieldSubmission(models.Model):
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.field.name
+        return self.field.label
 
     class Meta:
         ordering = ('-created_at',)
