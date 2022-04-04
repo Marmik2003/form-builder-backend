@@ -6,7 +6,7 @@ app_name = "typeforms"
 
 router = routers.DefaultRouter()
 router.register(r"", FormViewSet, basename="typeforms")
-router.register(r"(?P<form_id>[0-9]+)/fields", FieldViewSet, basename="fields")
-router.register(r"(?P<form_id>[0-9]+)/fields/(?P<field_id>[0-9]+)/options", OptionViewSet, basename="options")
+router.register(r"(?P<form_pk>[0-9]+)/fields", FieldViewSet, basename="fields")
+router.register(r"(?P<form_pk>[0-9]+)/fields/(?P<field_pk>[0-9]+)/options", OptionViewSet, basename="options")
 
 urlpatterns = router.urls
