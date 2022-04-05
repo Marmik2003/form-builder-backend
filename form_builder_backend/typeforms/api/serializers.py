@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from form_builder_backend.typeforms.models import Form, Field
+from form_builder_backend.typeforms.models import Form, Field, FieldOption
 
 
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Field
+        model = FieldOption
         fields = ('id', 'name', 'order')
 
 
