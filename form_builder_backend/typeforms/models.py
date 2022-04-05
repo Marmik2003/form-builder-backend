@@ -29,6 +29,7 @@ class Field(BaseModel):
         ('email', 'Email'),
         ('url', 'Url'),
         ('password', 'Password'),
+        ('select', 'Select'),
     )
     FORM_KIND = (
         ('text', 'Text'),
