@@ -55,7 +55,7 @@ class Field(BaseModel):
 
 class FieldOption(BaseModel):
     field = models.ForeignKey(Field, on_delete=models.CASCADE, related_name='options')
-    text = models.CharField(max_length=100)
+    text = models.CharField(max_length=100, blank=True)
     order = models.IntegerField(default=0, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
