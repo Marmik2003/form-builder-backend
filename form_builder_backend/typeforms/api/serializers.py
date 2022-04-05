@@ -13,7 +13,7 @@ class FieldSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Field
-        fields = ('id', 'label', 'type', 'kind', 'order', 'options', 'required')
+        fields = ('id', 'label', 'type', 'kind', 'order', 'options', 'multiple', 'required')
 
 
 class FormSerializer(serializers.ModelSerializer):

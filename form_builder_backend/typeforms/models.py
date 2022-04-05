@@ -42,6 +42,7 @@ class Field(BaseModel):
     label = models.CharField(max_length=100)
     type = models.CharField(max_length=100, choices=FORM_TYPE)
     kind = models.CharField(max_length=100, choices=FORM_KIND)
+    multiple = models.BooleanField(default=False, blank=True)
     order = models.IntegerField(default=0, blank=True)
     required = models.BooleanField(default=False, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
