@@ -17,7 +17,7 @@ class Form(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('created_at',)
 
 
 class Field(models.Model):
@@ -52,7 +52,7 @@ class Field(models.Model):
         return self.label
 
     class Meta:
-        ordering = ('order', '-created_at',)
+        ordering = ('order', 'created_at',)
 
 
 class FieldOption(models.Model):
@@ -68,7 +68,7 @@ class FieldOption(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('order', '-created_at',)
+        ordering = ('order', 'created_at',)
 
 
 class FormSubmission(models.Model):
