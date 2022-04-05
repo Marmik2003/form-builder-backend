@@ -30,6 +30,7 @@ class Field(BaseModel):
         ('url', 'Url'),
         ('password', 'Password'),
         ('select', 'Select'),
+        ('radio', 'Radio'),
     )
     FORM_KIND = (
         ('text', 'Text'),
