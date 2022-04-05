@@ -5,7 +5,7 @@ from form_builder_backend.typeforms.models import Form, Field, FieldOption
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = FieldOption
-        fields = ('id', 'name', 'order')
+        fields = ('id', 'text', 'order')
 
 
 class FieldSerializer(serializers.ModelSerializer):
