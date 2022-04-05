@@ -24,7 +24,7 @@ class FormViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return Form.objects.filter(user=self.request.user, deleted=False, fields__deleted=False)
+        return Form.objects.filter(user=self.request.user, deleted=False)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
