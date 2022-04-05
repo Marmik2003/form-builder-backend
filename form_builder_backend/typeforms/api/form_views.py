@@ -2,7 +2,7 @@ from rest_framework import generics, authentication, permissions, status, viewse
 
 from form_builder_backend.typeforms.api.serializers import FormSerializer, FormWithFieldsSerializer, FieldSerializer, \
     OptionSerializer
-from form_builder_backend.typeforms.models import Form, Field
+from form_builder_backend.typeforms.models import Form, Field, FieldOption
 from form_builder_backend.typeforms.api.mixins import GetSerializerClassMixin
 
 
@@ -66,7 +66,7 @@ class OptionViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user, field_id=self.kwargs['field_pk'])
 
     def get_queryset(self):
-        return Field.objects.filter(user=self.request.user, field_id=self.kwargs['field_pk'], deleted=False)
+        return FieldOption.objects.filter(user=self.request.user, field_id=self.kwargs['field_pk'], deleted=False)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
