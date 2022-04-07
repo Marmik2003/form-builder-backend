@@ -27,10 +27,18 @@ class FormWithFieldsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Form
-        fields = ('name', 'description', 'fields')
+        fields = ('id', 'name', 'description', 'fields')
+
+
+class SubmissionFieldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FieldSubmission
+        fields = ('id', 'field', 'value')
 
 
 class FormSubmissionSerializer(serializers.ModelSerializer):
+    fields = SubmissionFieldSerializer(many=True)
+
     class Meta:
         model = FormSubmission
         fields = ('id', 'fields')
