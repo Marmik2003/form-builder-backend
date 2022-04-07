@@ -47,7 +47,6 @@ class FormSubmissionSerializer(serializers.ModelSerializer):
         fields = validated_data.pop('fields')
         form_submission = FormSubmission.objects.create(
             form_id=self.context['view'].kwargs.get('form_pk'),
-            user=self.context['view'].request.user,
             **validated_data
         )
         for field in fields:
