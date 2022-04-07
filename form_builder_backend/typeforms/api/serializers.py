@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from form_builder_backend.typeforms.models import Form, Field, FieldOption
+from form_builder_backend.typeforms.models import Form, Field, FieldOption, FormSubmission, FieldSubmission
 
 
 class OptionSerializer(serializers.ModelSerializer):
@@ -28,3 +28,9 @@ class FormWithFieldsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = ('name', 'description', 'fields')
+
+
+class FormSubmissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FormSubmission
+        fields = ('id', 'fields')

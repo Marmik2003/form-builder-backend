@@ -1,8 +1,8 @@
-from rest_framework import generics, authentication, permissions, status, viewsets, response, pagination
+from rest_framework import permissions, status, viewsets, response
 
 from form_builder_backend.typeforms.api.serializers import FormSerializer, FormWithFieldsSerializer, FieldSerializer, \
-    OptionSerializer
-from form_builder_backend.typeforms.models import Form, Field, FieldOption
+    OptionSerializer, FormSubmissionSerializer
+from form_builder_backend.typeforms.models import Form, Field, FieldOption, FormSubmission
 from form_builder_backend.typeforms.api.mixins import GetSerializerClassMixin
 
 
@@ -73,3 +73,17 @@ class OptionViewSet(viewsets.ModelViewSet):
         instance.deleted = True
         instance.save()
         return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class FormSubmissionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows form submissions to be viewed, created or edited.
+    """
+
+    serializer_class = FormSubmissionSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    http_method_names = ['get', 'post']
+
+    def get_queryset(self):
+        return FormSubmission.objects.filter(user=self.request.user, form_id=self.kwargs['form_pk'], deleted=False)
+
