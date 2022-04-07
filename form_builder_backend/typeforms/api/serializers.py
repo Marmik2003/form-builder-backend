@@ -31,6 +31,8 @@ class FormWithFieldsSerializer(serializers.ModelSerializer):
 
 
 class SubmissionFieldSerializer(serializers.ModelSerializer):
+    field = FieldSerializer()
+
     class Meta:
         model = FieldSubmission
         fields = ('id', 'field', 'value')
