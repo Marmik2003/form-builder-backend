@@ -87,3 +87,6 @@ class FormSubmissionViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return FormSubmission.objects.filter(user=self.request.user, form_id=self.kwargs['form_pk'], deleted=False)
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
