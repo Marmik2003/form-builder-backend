@@ -31,7 +31,6 @@ class FormWithFieldsSerializer(serializers.ModelSerializer):
 
 
 class SubmissionFieldSerializer(serializers.ModelSerializer):
-    field = FieldSerializer()
 
     class Meta:
         model = FieldSubmission
@@ -55,3 +54,20 @@ class FormSubmissionSerializer(serializers.ModelSerializer):
         for field in fields:
             FieldSubmission.objects.create(submission=form_submission, **field)
         return form_submission
+
+
+class GetSubmissionFieldSerializer(serializers.ModelSerializer):
+    field = FieldSerializer(read_only=True)
+
+    class Meta:
+        model = FieldSubmission
+        fields = ('id', 'field', 'value')
+
+
+class GetSubmissionSerializer(serializers.ModelSerializer):
+    form = FormSerializer(read_only=True)
+    fields = GetSubmissionFieldSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = FormSubmission
+        fields = ('id', 'form', 'fields')
