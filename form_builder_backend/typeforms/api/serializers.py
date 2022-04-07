@@ -42,3 +42,10 @@ class FormSubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = FormSubmission
         fields = ('id', 'fields')
+
+    def create(self, validated_data):
+        fields = validated_data.pop('fields')
+        form_submission = FormSubmission.objects.create(**validated_data)
+        for field in fields:
+            FieldSubmission.objects.create(submission=form_submission, **field)
+        return form_submission
