@@ -19,7 +19,7 @@ class FieldSerializer(serializers.ModelSerializer):
 class FormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form
-        fields = ('id', 'name', 'description')
+        fields = ('id', 'name', 'description', 'is_public')
 
 
 class FormWithFieldsSerializer(serializers.ModelSerializer):

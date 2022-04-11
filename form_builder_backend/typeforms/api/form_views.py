@@ -12,7 +12,6 @@ class FormViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
     """
 
     serializer_class = FormWithFieldsSerializer
-    permission_classes = (permissions.IsAuthenticated,)
     serializer_action_classes = {
         'list': FormSerializer,
         'create': FormSerializer,
@@ -24,7 +23,10 @@ class FormViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return Form.objects.filter(user=self.request.user, deleted=False)
+        if self.request.user.is_authenticated:
+            return Form.objects.filter(user=self.request.user)
+        else:
+            return Form.objects.filter(is_public=True)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -90,8 +92,5 @@ class FormSubmissionViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return FormSubmission.objects.filter(user=self.request.user, form_id=self.kwargs['form_pk'], deleted=False)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        return FormSubmission.objects.filter(form_id=self.kwargs['form_pk'], deleted=False)
 
