@@ -83,7 +83,7 @@ class FormSubmissionViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
     """
 
     serializer_class = FormSubmissionSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     http_method_names = ['get', 'post']
     serializer_action_classes = {
         'list': GetSubmissionSerializer,
@@ -92,5 +92,8 @@ class FormSubmissionViewSet(GetSerializerClassMixin, viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return FormSubmission.objects.filter(form_id=self.kwargs['form_pk'], deleted=False)
+        if self.request.user.is_authenticated:
+            return FormSubmission.objects.filter(form_id=self.kwargs['form_pk'], user=self.request.user)
+        else:
+            return FormSubmission.objects.filter(form_id=self.kwargs['form_pk'], is_public=True)
 
